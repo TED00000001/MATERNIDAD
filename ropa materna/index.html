@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ropa Materna</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .container1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .caja {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      width: 220px;
+      padding: 10px;
+      color: #fff;
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+    .caja img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #ff80ab;
+    }
+    .nombre {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffb6c1;
+    }
+    .precio {
+      background-color: #ff80ab;
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="left-box">
+      <button class="menu-btn" onclick="toggleMenu()">☰ Menú</button>
+      <div class="logo">RM</div>
+      <div class="title">Ropa Materna</div>
+    </div>
+    <div class="info-box">
+      <div class="options">
+        <a href="index.html">Inicio</a>
+        <a href="login.html">Insertar</a>
+      </div>
+      <button class="buy-btn">Comprar ahora</button>
+    </div>
+  </div>
+
+  <div class="menu" id="menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
+    <a href="#">Inicio</a>
+    <a href="#">Blusas</a>
+    <a href="#">Vestidos</a>
+    <a href="#">Leggins</a>
+    <a href="#">Jeans</a>
+    <a href="#">Batas</a>
+    <a href="#">Accesorios</a>
+    <a href="#">Ofertas</a>
+    <a href="#">Contactanos</a>
+    <a href="#">Ubicación</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+    }
+    function closeMenu() {
+      document.getElementById("menu").style.display = "none";
+    }
+  </script>
+
+  <h1 style="text-align:center; color:#ff80ab;">🛍️ Productos disponibles 🛍️</h1>
+  <div class="container1" id="galeria"></div>
+
+  <script>
+    const galeria = document.getElementById("galeria");
+    const productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+    if (productos.length === 0) {
+      galeria.innerHTML = "<p style='color:white; text-align:center;'>No hay productos guardados.</p>";
+    } else {
+      productos.forEach(p => {
+        const caja = document.createElement("div");
+        caja.classList.add("caja");
+
+        const img = document.createElement("img");
+        img.src = p.imagen;
+
+        const nombre = document.createElement("p");
+        nombre.classList.add("nombre");
+        nombre.textContent = p.nombre;
+
+        const precio = document.createElement("p");
+        precio.classList.add("precio");
+        precio.textContent = "S/ " + parseFloat(p.precio).toFixed(2);
+
+        caja.append(img, nombre, precio);
+        galeria.appendChild(caja);
+      });
+    }
+  </script>
+</body>
+</html>
