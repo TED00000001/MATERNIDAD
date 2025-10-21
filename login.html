@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Jepeto's</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cuadro {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 50px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 360px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .cuadro img {
+      width: 120px;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      color: #ff6699;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 2px solid #ffc0cb;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ff69b4;
+      box-shadow: 0 0 8px rgba(255, 105, 180, 0.4);
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    h3, p {
+      margin: 8px 0;
+      font-size: 15px;
+    }
+
+    #msgError {
+      color: red;
+      font-weight: bold;
+    }
+
+    #msg1, #msg2 {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cuadro">
+    <img src="images/conejo.gif" alt="Conejo animado">
+
+    <h2>Iniciar Sesión</h2>
+
+    <label>Usuario:</label><br>
+    <input id="entradaUsuario" placeholder="Ingresa tu usuario">
+    <h3 id="msg1"></h3>
+
+    <label>Contraseña:</label><br>
+    <input id="entradaContraseña" type="password" placeholder="Ingresa tu contraseña">
+    <h3 id="msg2"></h3>
+
+    <button id="btnEntrar">Entrar</button>
+    <h3 id="msgError"></h3>
+  </div>
+
+  <script>
+    const msg1 = document.getElementById("msg1");
+    const ent1 = document.getElementById("entradaUsuario");
+    const msg2 = document.getElementById("msg2");
+    const ent2 = document.getElementById("entradaContraseña");
+    const btnEntrar = document.getElementById("btnEntrar");
+    const msgError = document.getElementById("msgError");
+
+    const usuarioCorrecto = "samvilca";
+    const contraseñaCorrecta = "pepa2025";
+
+    ent1.addEventListener("input", () => {
+      const regx = /^[A-Za-z0-9]+$/;
+      if (regx.test(ent1.value)) {
+        msg1.textContent = "✔ Dato correcto";
+        msg1.style.color = "green";
+      } else {
+        msg1.textContent = "✖ Solo letras y números";
+        msg1.style.color = "red";
+      }
+    });
+
+    ent2.addEventListener("input", () => {
+      const regx = /^[A-Za-z0-9]+$/;
+      if (regx.test(ent2.value)) {
+        msg2.textContent = "✔ Dato correcto";
+        msg2.style.color = "green";
+      } else {
+        msg2.textContent = "✖ Contraseña inválida";
+        msg2.style.color = "red";
+      }
+    });
+
+    btnEntrar.addEventListener("click", () => {
+      if (ent1.value === usuarioCorrecto && ent2.value === contraseñaCorrecta) {
+        location.href = "insertarimagen.html";
+      } else {
+        msgError.textContent = "⚠ Usuario o contraseña incorrectos";
+      }
+    });
+  </script>
+
+</body>
+</html>
